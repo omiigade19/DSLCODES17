@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+int graph[10][10], visited[10], n;
+
+void dfs(int v)
+{
+    visited[v] = 1;
+
+    for(int i = 0; i < n; i++)
+    {
+        if(graph[v][i] == 1 && visited[i] == 0)
+            dfs(i);
+    }
+}
+
+int main()
+{
+    int edges, a, b;
+
+    cout << "Enter number of cities: ";
+    cin >> n;
+
+    cout << "Enter number of flights: ";
+    cin >> edges;
+
+    for(int i = 0; i < n; i++)
+    {
+        visited[i] = 0;
+
+        for(int j = 0; j < n; j++)
+            graph[i][j] = 0;
+    }
+
+    cout << "Enter flight routes (city numbers):\n";
+
+    for(int i = 0; i < edges; i++)
+    {
+        cin >> a >> b;
+        graph[a][b] = 1;
+        graph[b][a] = 1;
+    }
+
+    dfs(0);
+
+    int connected = 1;
+
+    for(int i = 0; i < n; i++)
+    {
+        if(visited[i] == 0)
+            connected = 0;
+    }
+
+    if(connected == 1)
+        cout << "Graph is connected";
+    else
+        cout << "Graph is not connected";
+
+    return 0;
+}
