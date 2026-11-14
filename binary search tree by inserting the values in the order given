@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+struct node
+{
+    int data;
+    node *left, *right;
+};
+node* insert(node *root, int x)
+{
+    if(root == NULL)
+    {
+        node *temp = new node;
+        temp->data = x;
+        temp->left = temp->right = NULL;
+        return temp;
+    }
+    if(x < root->data)
+        root->left = insert(root->left, x);
+    else
+        root->right = insert(root->right, x);
+
+    return root;
+}
+void display(node *root)
+{
+    if(root != NULL)
+    {
+        display(root->left);
+        cout << root->data << " ";
+        display(root->right);
+    }
+}
+void search(node *root, int x)
+{
+    if(root == NULL)
+    {
+        cout << "Value not found";
+        return;
+    }
+    if(root->data == x)
+    {
+        cout << "Value found";
+        return;
+    }
+    if(x < root->data)
+        search(root->left, x);
+    else
+        search(root->right, x);
+}
+void minimum(node *root)
+{
+    while(root->left != NULL)
+        root = root->left;
+
+    cout << "\nMinimum value: " << root->data;
+}
+int main()
+{
+    node *root = NULL;
+    int n, x;
+
+    cout << "Enter number of nodes: ";
+    cin >> n;
+
+    cout << "Enter values: ";
+    for(int i = 0; i < n; i++)
+    {
+        cin >> x;
+        root = insert(root, x);
+    }
+
+    cout << "\nBST: ";
+    display(root);
+    cout << "\nEnter new node: ";
+    cin >> x;
+    root = insert(root, x);
+    cout << "After insertion: ";
+    display(root);
+    cout << "\nEnter value to search: ";
+    cin >> x;
+    search(root, x);
+    minimum(root);
+    return 0;
+}
