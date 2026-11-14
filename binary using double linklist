@@ -1,0 +1,83 @@
+#include<iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    node *prev,*next;
+};
+int main()
+{
+    node *head=NULL,*temp,*newnode;
+    char a[20];
+    int i;
+
+    cout<<"Enter binary number: ";
+    cin>>a;
+
+    // Create doubly linked list
+    for(i=0;a[i]!='\0';i++)
+    {
+        newnode=new node;
+        newnode->data=a[i]-'0';
+        newnode->prev=NULL;
+        newnode->next=NULL;
+        if(head==NULL)
+            head=newnode;
+        else
+        {
+            temp->next=newnode;
+            newnode->prev=temp;
+        }
+
+        temp=newnode;
+    }
+
+    cout<<"1's Complement: ";
+
+    temp=head;
+
+    while(temp!=NULL)
+    {
+        if(temp->data==0)
+            temp->data=1;
+        else
+            temp->data=0;
+
+        cout<<temp->data;
+        temp=temp->next;
+    }
+
+    // 2's complement
+    temp=head;
+
+    while(temp->next!=NULL)
+        temp=temp->next;
+
+    int carry=1;
+
+    while(temp!=NULL && carry==1)
+    {
+        if(temp->data==0)
+        {
+            temp->data=1;
+            carry=0;
+        }
+        else
+        {
+            temp->data=0;
+            carry=1;
+        }
+
+        temp=temp->prev;
+    }
+    cout<<"\n2's Complement: ";
+    temp=head;
+
+    while(temp!=NULL)
+    {
+        cout<<temp->data;
+        temp=temp->next;
+    }
+    return 0;
+}
