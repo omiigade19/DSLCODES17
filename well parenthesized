@@ -1,0 +1,46 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    char s[50];
+    char stack[50];
+    int top=-1,i;
+
+    cout<<"Enter expression: ";
+    cin>>s;
+
+    for(i=0;s[i]!='\0';i++)
+    {
+        if(s[i]=='(' || s[i]=='{' || s[i]=='[')
+        {
+            top++;
+            stack[top]=s[i];
+        }
+        else if(s[i]==')' || s[i]=='}' || s[i]==']')
+        {
+            if(top==-1)
+            {
+                break;
+            }
+
+            if((s[i]==')' && stack[top]=='(') ||
+               (s[i]=='}' && stack[top]=='{') ||
+               (s[i]==']' && stack[top]=='['))
+            {
+                top--;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+
+    if(s[i]=='\0' && top==-1)
+        cout<<"Expression is well parenthesized";
+    else
+        cout<<"Expression is not well parenthesized";
+
+    return 0;
+}
