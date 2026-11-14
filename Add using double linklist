@@ -1,0 +1,84 @@
+#include<iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    node *prev,*next;
+};
+
+int main()
+{
+    node *head1=NULL,*head2=NULL;
+    node *temp,*newnode;
+    char a[20],b[20];
+    cout<<"Enter first binary number: ";
+    cin>>a;
+    cout<<"Enter second binary number: ";
+    cin>>b;
+    for(int i=0;a[i]!='\0';i++)
+    {
+        newnode=new node;
+        newnode->data=a[i]-'0';
+        newnode->prev=NULL;
+        newnode->next=NULL;
+
+        if(head1==NULL)
+            head1=newnode;
+        else
+        {
+            temp->next=newnode;
+            newnode->prev=temp;
+        }
+        temp=newnode;
+    }
+    for(int i=0;b[i]!='\0';i++)
+    {
+        newnode=new node;
+        newnode->data=b[i]-'0';
+        newnode->prev=NULL;
+        newnode->next=NULL;
+
+        if(head2==NULL)
+            head2=newnode;
+        else
+        {
+            temp->next=newnode;
+            newnode->prev=temp;
+        }
+        temp=newnode;
+    }
+
+    node *p=head1,*q=head2;
+
+    while(p->next!=NULL)
+        p=p->next;
+
+    while(q->next!=NULL)
+        q=q->next;
+
+    int carry=0,sum;
+    int c[50],i=0;
+
+    while(p!=NULL && q!=NULL)
+    {
+        sum=p->data+q->data+carry;
+
+        c[i]=sum%2;
+        carry=sum/2;
+
+        i++;
+        p=p->prev;
+        q=q->prev;
+    }
+
+    if(carry==1)
+        c[i++]=1;
+
+    cout<<"Addition: ";
+
+    for(int j=i-1;j>=0;j--)
+        cout<<c[j];
+
+    return 0;
+}
