@@ -1,0 +1,108 @@
+#include<iostream>
+using namespace std;
+
+struct node
+{
+    int prn;
+    string name;
+    node *next;
+};
+
+node* create()
+{
+    node *head=NULL,*temp,*newnode;
+    int n;
+
+    cout<<"Enter number of members: ";
+    cin>>n;
+
+    for(int i=0;i<n;i++)
+    {
+        newnode=new node;
+
+        cout<<"Enter PRN: ";
+        cin>>newnode->prn;
+
+        cout<<"Enter Name: ";
+        cin>>newnode->name;
+
+        newnode->next=NULL;
+
+        if(head==NULL)
+            head=newnode;
+        else
+            temp->next=newnode;
+
+        temp=newnode;
+    }
+
+    return head;
+}
+
+void display(node *head)
+{
+    node *temp=head;
+
+    while(temp!=NULL)
+    {
+        cout<<"\nPRN: "<<temp->prn;
+        cout<<"\nName: "<<temp->name;
+        temp=temp->next;
+    }
+}
+
+void count(node *head)
+{
+    int c=0;
+    node *temp=head;
+
+    while(temp!=NULL)
+    {
+        c++;
+        temp=temp->next;
+    }
+
+    cout<<"\nTotal members: "<<c;
+}
+
+node* concatenate(node *head1,node *head2)
+{
+    node *temp=head1;
+
+    if(head1==NULL)
+        return head2;
+
+    while(temp->next!=NULL)
+        temp=temp->next;
+
+    temp->next=head2;
+
+    return head1;
+}
+
+int main()
+{
+    node *head1,*head2,*head3;
+
+    cout<<"\nEnter Division A details\n";
+    head1=create();
+
+    cout<<"\nEnter Division B details\n";
+    head2=create();
+
+    cout<<"\nDivision A Members:";
+    display(head1);
+    count(head1);
+
+    cout<<"\n\nDivision B Members:";
+    display(head2);
+    count(head2);
+
+    head3=concatenate(head1,head2);
+
+    cout<<"\n\nAfter Concatenation:";
+    display(head3);
+    count(head3);
+
+    return 0;
+}
