@@ -1,0 +1,48 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    float a[50],temp;
+    int n,i,j,min;
+
+    cout<<"Enter number of students: ";
+    cin>>n;
+
+    cout<<"Enter percentages: ";
+    for(i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+
+    // Selection Sort
+    for(i=0;i<n-1;i++)
+    {
+        min=i;
+
+        for(j=i+1;j<n;j++)
+        {
+            if(a[j]<a[min])
+                min=j;
+        }
+
+        temp=a[i];
+        a[i]=a[min];
+        a[min]=temp;
+    }
+
+    cout<<"\nSorted percentages: ";
+    for(i=0;i<n;i++)
+    {
+        cout<<a[i]<<" ";
+    }
+
+    cout<<"\nTop five scores: ";
+    for(i=n-1;i>=n-5 && i>=0;i--)
+    {
+        cout<<a[i]<<" ";
+    }
+
+    return 0;
+}
+
